@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: linear-gradient(to right, #8999d3, #bccafa);
+            font-family: 'Arial', sans-serif;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            
+        }
+
+        main {
+            background-color: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            cursor: pointer;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            
+        }
+
+     
+         span {
+            min-width: 200px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+    
+
+    </style>
+</head>
+<body>
+    <main>
+        
+        <h1>Weather Information</h1>
+        <p><span>Latitude: </span>{{ weather_data.lat }}</p>
+        <p><span>Longitude: </span>{{ weather_data.lon }}</p>
+        <p><span>Temperature: </span>{{ weather_data.temp }} °C</p>
+        <p><span>Min Temperature: </span>{{ weather_data.temp_min }} °C</p>
+        <p><span>Max Temperature: </span>{{ weather_data.temp_max }} °C</p>
+        <p><span>Pressure:</span> {{ weather_data.pressure}} hPa</p>
+        <p><span>Humidity:</span> {{ weather_data.humidity }} %</p>
+        <p><span>Wind Speed:</span> {{ weather_data.wind_speed}} m/s</p>
+        <p><span>Weather Description:</span> {{ weather_data.weather_description}} </p>
+
+       
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
