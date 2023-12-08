@@ -1,0 +1,32 @@
+{% extends "authentication/base.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+    <div class="container mt-5 d-flex align-items-center justify-content-center" style="min-height: 100vh">
+        <div class="card" style="width: 350px;margin-bottom: 50px;">
+            <div class="card-body">
+                <h1 class="card-title" style="text-align: center;">Login</h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" name="password" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary" style="display: block;width: 100%;right: 0;">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
