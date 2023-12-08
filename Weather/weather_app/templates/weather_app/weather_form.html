@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Check Weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        
+        body {
+            background-image: linear-gradient(to right, #8ec95e,#84e633);
+            font-family: 'Arial', sans-serif;
+            
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        header {
+            color: black;
+            padding: 20px;
+            font-weight: bolder;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Check Weather</h1>
+    </header>
+    <form method="post" action="{% url 'weather' %}">
+        {% csrf_token %}
+        <label for="city" >City:</label>
+        <input type="text" name="city" id="city" placeholder="Enter a city or live location"  required>
+        <input type="hidden" name="latitude" id="id_latitude" />
+        <input type="hidden" name="longitude" id="id_longitude" />
+        <button type="submit">Get Weather</button>
+        <label for="live_location">Live Location</label>
+        <input type="checkbox" name="live_location" id="id_live_location"> 
+        
+    </form>    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 2000,
+            };
+
+            
+            const liveLocationCheckbox = document.getElementById('id_live_location');
+            const latitudeField = document.getElementById('id_latitude');
+            const longitudeField = document.getElementById('id_longitude');
+
+            liveLocationCheckbox.addEventListener('change',function(){
+                if(this.checked) {
+                    if(navigator.geolocation){
+                        navigator.geolocation.getCurrentPosition(
+                            function(position) {
+                                latitudeField.value = position.coords.latitude;
+                                longitudeField.value = position.coords.longitude;
+                                console.log('Latitude:',position.coords.latitude);
+                                console.log('Longitude:',position.coords.longitude);
+                              
+                            },
+                            function(error) {
+                                console.error('Error getting location:',error.message);
+                                
+                            },
+                            {timeout: 10000}
+                        );
+                    } else {
+                        console.error('Geolocation is not supported by this browser.');
+                        
+                    }
+                }else{
+                    latitudeField.value = '';
+                    longitudeField.value = '';
+                }
+            });
+        });
+    </script>    
+     
+</body>
+</html>
